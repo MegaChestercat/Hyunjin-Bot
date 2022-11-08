@@ -2,8 +2,8 @@ module.exports = {
     name: "purge",
     aliases: ["clear", "delete", "clean", "delete-messages"],
     desc: "It helps to delete multiple messages from a channel",
-    permisos: ["MANAGE_MESSAGES"],
-    permisos_bot: ["MANAGE_MESSAGES"],
+    permissions: ["MANAGE_MESSAGES"],
+    bot_permissions: ["MANAGE_MESSAGES"],
     run: async (client, message, args, prefix) => {
         const amount = args[0]
 
@@ -19,8 +19,6 @@ module.exports = {
         if(amount < 1){
             return message.channel.send("❌ **The minimum amount you can delete at a time is of 1 message. Specify a number bigger than 0**");
         }
-
-        //setTimeout(() => message.delete().catch(() => {}), 1500)
 
         try {
             setTimeout(() => message.channel.bulkDelete(amount), 2500)

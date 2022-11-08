@@ -2,23 +2,23 @@ const fs = require("fs");
 
 module.exports = (client) => {
     try{
-        let comandos = 0;
-        fs.readdirSync("./comandos/").forEach((carpeta) => {
-            const commands = fs.readdirSync(`./comandos/${carpeta}`).filter((archivo) => archivo.endsWith(".js"));
-            for(let archivo of commands){
-                let comando = require(`../comandos/${carpeta}/${archivo}`);
-                if(comando.name){
-                    client.commands.set(comando.name, comando);
-                    comandos++;
+        let commandNum = 0;
+        fs.readdirSync("./commands/").forEach((folder) => {
+            const commands = fs.readdirSync(`./commands/${folder}`).filter((file) => file.endsWith(".js"));
+            for(let file of commands){
+                let command = require(`../commands/${folder}/${file}`);
+                if(command.name){
+                    client.commands.set(command.name, command);
+                    commandNum++;
                 }
                 else{
-                    console.log(`COMANDO [/${carpeta}/${archivo}]`, `error => el comando no está configurado`.brightred);
+                    console.log(`COMMAND [/${folder}/${file}]`, `error => the command is not set up`.brightred);
                     continue;
                 }
-                if(comando.aliases && Array.isArray(comando.aliases)) comando.aliases.forEach((alias) => client.aliases.set(alias, comando.name));
+                if(command.aliases && Array.isArray(command.aliases)) command.aliases.forEach((alias) => client.aliases.set(alias, command.name));
             }
         });
-        console.log(`${comandos} Comandos cargados`.brightGreen);
+        console.log(`${commandNum} Loaded commands`.brightGreen);
     } catch(e){
         console.log(e.red);
     }

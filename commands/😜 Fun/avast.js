@@ -1,8 +1,8 @@
 module.exports = {
 name: "avast",
     aliases: [`antivirus`, `virus`],
-    desc: "La base de datos de virus ha sido actualizada",
+    desc: "The virus database has been updated",
     run: async(client, message, args, prefix) => {
-        message.channel.send({files: ["Avast Audio.mp3"]})
+        message.channel.send({files: ["/src/Avast Audio.mp3"]})
     }
 }    

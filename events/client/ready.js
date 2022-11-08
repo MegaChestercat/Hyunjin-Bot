@@ -6,11 +6,11 @@ module.exports = client => {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
-        console.log("Conectado a la base de datos de MONGODB".blue);
+        console.log("Connected to MONGODB database".blue);
     }).catch((err) =>{
-        console.log("Error al conectar a la base de datos de MONGODB".red);
+        console.log("Error when connecting to MONGODB database".red);
         console.log(err);
     })
 
-    console.log(`Conectado como ${client.user.tag}`.green)
+    console.log(`Connected as ${client.user.tag}`.green)
 }

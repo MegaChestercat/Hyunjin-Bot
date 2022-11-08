@@ -19,7 +19,7 @@ module.exports = {
             `https://thumbs.gfycat.com/CompetentWearyGreatdane-size_restricted.gif`,
             'https://c.tenor.com/LpNlJxRBFwMAAAAC/umibe-no-etranger-anime.gif'
         ];
-        let RandomGifs = RandomGifs_Text[Math.floor(Math.random() * RandomGifs_Text.length)]; // establecemos el random, para que los gifs que pongamos ahi sean random
+        let RandomGifs = RandomGifs_Text[Math.floor(Math.random() * RandomGifs_Text.length)];
 
         const embed = new MessageEmbed()
         .setTitle(`${member.username} was kissed by ${message.author.username}`)
@@ -27,9 +27,5 @@ module.exports = {
         .setColor("RED")
 
         message.reply({embeds: [embed]});
-
-        //const file = new MessageAttachment(RandomGifs); // Establecemos el attachment y ponemos el random para que mande la imagen random claro.
-
-        //message.reply({ content: `<@${member.id}> **was kissed by** <@${message.author.id}>`, files: [file] }); // Enviamos el mensaje con el usuario que fue besado, y el file, el attachment
     }
 }

@@ -16,11 +16,11 @@ const client = new Client({
     ]
 });
 
-client.commands = new Collection(); //?Here all bot commands will be saved
+client.commands = new Collection(); //Here all bot commands will be saved
 client.aliases = new Collection(); //Here all command Aliases will be saved
 
 function requerirhandlers(){
-    ["command", "events", "sugerencias"].forEach(handler => {
+    ["command", "events", "suggestions"].forEach(handler => {
         try{
             require(`./handlers/${handler}`)(client)
         } catch(e){
@@ -31,60 +31,25 @@ function requerirhandlers(){
 requerirhandlers();
 
 client.once("ready", () =>{
-    /*const estados = [
-        {
-            tipo: "PLAYING", //types: PLAYING(jugando), LISTENING(escuchando), COMPETING(compitiendo), WATCHING(mirando), STREAMING(transmitiendo)
-            contenido: "Camp Buddy",
-            opcionesestados: "on" //dnd(no molestar), on(conectado), idle(ausente)
-        },
-        {
-            tipo: "WATCHING",
-            contenido: "Brokeback Mountain",
-            opcionesestados: "on"
-        },
-        {
-            tipo: "PLAYING",
-            contenido: "Nancy Drew",
-            opcionesestados: "on"
-        },
-        {
-            tipo: "PLAYING",
-            contenido: "Full Service",
-            opcionesestados: "on"
-        },
-        {
-            tipo: "STREAMING",
-            contenido: "Outlast",
-            opcionesestados: "on"
-        },
-        {
-            tipo: "LISTENING",
-            contenido: "Lady Gaga",
-            opcionesestados: "on"
-        },
 
-    ];*/
-
-    async function activarestados() {
-        //const estado = Math.floor(Math.random() * estados.length); 
+    async function activateState() {
 
         try {
             await client.user.setPresence({
                 activities: [
                     {
-                        name:"Jock Studio", //estados[estado].contenido,
-                        type: "PLAYING"//estados[estado].tipo
+                        name:"Camp Buddy", 
+                        type: "PLAYING"//types: PLAYING, LISTENING, COMPETING, WATCHING, STREAMING
                     },
                 ],
-                status: "on"//estados[estado].opcionesestados
+                status: "on"//dnd(do not disturb), on(connected), idle
             });
             
         } catch (error) {
             console.error(error);
         }
     }
-    //setInterval(activarestados,900000);
-    activarestados();
+    activateState();
 
     console.log('The bot is online');
 });
@@ -92,18 +57,15 @@ client.once("ready", () =>{
 client.on("guildMemberAdd", async member => { //an alternative to client.emojis.cache.find(emoji => emoji.name === 'IrumaSmile').toString() could be just putting <:IrumaSmile:974423014131236904>
     const opt1 = client.emojis.cache.find(emoji => emoji.name === 'IrumaSmile').toString() + " **Hey** <@" + member.id + ">**, welcome to Hyunjin Paradise!** " + client.emojis.cache.find(emoji => emoji.name === 'IrumaSmile').toString() + "\n\nDo not forget on grabbing some roles on"  + member.guild.channels.cache.get(process.env.ROLECH).toString() + ", and introducing yourself on" + member.guild.channels.cache.get(process.env.INTROCH).toString() + ", so we can know more about you. " + client.emojis.cache.find(emoji => emoji.name === 'Meliodas_Go').toString();
     const opt2 = client.emojis.cache.find(emoji => emoji.name === 'YoichiHeart').toString() + " **Hello there** <@" + member.id + ">**, welcome to my techy dominion** " + client.emojis.cache.find(emoji => emoji.name === 'dr_senku_xoxo').toString() + "\n\nRemember to grab some roles on " + member.guild.channels.cache.get(process.env.ROLECH).toString() + ", and to introduce yourself on" + member.guild.channels.cache.get(process.env.INTROCH).toString() + ", so we can know each other. \n\nXOXO -Jin" + client.emojis.cache.find(emoji => emoji.name === 'DayEscanor').toString();
-    const opt3 = client.emojis.cache.find(emoji => emoji.name === 'LelouchCoff').toString() + " **Hi** <@" + member.id + ">**, my name is Hyunjin, but you can call me Jin**" + client.emojis.cache.find(emoji => emoji.name === 'IrumaSmile').toString() + "\n\nIf you want some booty and deliousness you came to the right place... wait what did I just said? Hmmmmmm. " + client.emojis.cache.find(emoji => emoji.name === 'brolyass').toString() + " Anyway, just grab some roles on " + member.guild.channels.cache.get(process.env.ROLECH).toString() + ", and introduce yourself on" + member.guild.channels.cache.get(process.env.INTROCH).toString() + ", while I stop my nose bleeding." + client.emojis.cache.find(emoji => emoji.name === 'Meliodas_Go').toString();
+    //const opt3 = client.emojis.cache.find(emoji => emoji.name === 'LelouchCoff').toString() + " **Hi** <@" + member.id + ">**, my name is Hyunjin, but you can call me Jin**" + client.emojis.cache.find(emoji => emoji.name === 'IrumaSmile').toString() + "\n\nIf you want some booty and deliousness you came to the right place... wait what did I just said? Hmmmmmm. " + client.emojis.cache.find(emoji => emoji.name === 'brolyass').toString() + " Anyway, just grab some roles on " + member.guild.channels.cache.get(process.env.ROLECH).toString() + ", and introduce yourself on" + member.guild.channels.cache.get(process.env.INTROCH).toString() + ", while I stop my nose bleeding." + client.emojis.cache.find(emoji => emoji.name === 'Meliodas_Go').toString();
     
-    let ranAnswer = Math.floor(Math.random() * (4 - 1 + 1)) + 1; 
+    let ranAnswer = Math.floor(Math.random() * (2 - 1 + 1)) + 1; 
 
     if(ranAnswer == 1){
         member.client.channels.cache.get(process.env.GENCH).send(opt1); 
     }
-    else if(ranAnswer == 2){
-        member.client.channels.cache.get(process.env.GENCH).send(opt2); 
-    }
     else{
-        member.client.channels.cache.get(process.env.GENCH).send(opt3); 
+        member.client.channels.cache.get(process.env.GENCH).send(opt2); 
     }
 });
 
@@ -124,13 +86,13 @@ client.on("messageCreate", message =>{
             if(message.content.includes("big")){
                 let ranAnswer = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
                 if(ranAnswer == 4){
-                    message.reply("Big? Did somebody said BIG? ... hmmmmm XwX");
+                    message.reply("Big? What is big? XwX");
                 }
             }
             else{
                 let ranAnswer = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
                 if(ranAnswer == 4){
-                    message.reply("Giant?? What is giant?");
+                    message.reply("Giant??");
                 }
             }
         }

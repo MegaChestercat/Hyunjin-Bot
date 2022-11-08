@@ -4,7 +4,7 @@ module.exports = {
     name: `phub`,
     aliases: [`comment`, `phubcomment`, `phub-comment`, `pmessage`, `message`, `phub-message`, `phubmessage`],
     desc: "It lets you write a message as a Phub message",
-    permisos_bot: ["ADMINISTRATOR"],
+    bot_permissions: ["ADMINISTRATOR"],
     run: async(client, message, args, prefix) => {
         
         message.delete().catch(() => {});

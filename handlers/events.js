@@ -4,27 +4,27 @@ const allevents = [];
 module.exports = async (client) => {
     try{
         try{
-            console.log("Cargando los eventos...".yellow);
+            console.log("Loading events...".yellow);
         }catch {}
-        let cantidad = 0;
-        const cargar_dir = (dir) => {
-            const archivos_eventos = fs.readdirSync(`./eventos/${dir}`).filter((file) => file.endsWith(`.js`));
-            for(const archivo of archivos_eventos){
+        let quantity = 0;
+        const load_dir = (dir) => {
+            const events_file = fs.readdirSync(`./events/${dir}`).filter((file) => file.endsWith(`.js`));
+            for(const file of events_file){
                 try{
-                    const evento = require(`../eventos/${dir}/${archivo}`);
-                    const nombre_evento = archivo.split(".")[0];
-                    allevents.push(nombre_evento);
-                    client.on(nombre_evento, evento.bind(null, client));
-                    cantidad++;
+                    const event = require(`../events/${dir}/${file}`);
+                    const event_name = file.split(".")[0];
+                    allevents.push(event_name);
+                    client.on(event_name, event.bind(null, client));
+                    quantity++;
                 } catch(e){
                     console.log(e)
                 }
             }
         }
-        await ["client", "guild"].forEach(e => cargar_dir(e));
-        console.log(`${cantidad} Eventos cargados`.brightGreen);
+        await ["client", "guild"].forEach(e => load_dir(e));
+        console.log(`${quantity} Loaded events`.brightGreen);
         try{
-            console.log(`Iniciando sesión el bot...`.yellow);
+            console.log(`Logging in the bot...`.yellow);
         } catch(e){
             console.log(e)
         }

@@ -2,8 +2,8 @@ module.exports = {
     name: "presence",
     aliases: ["set-presence"],
     desc: "It lets you change the bot presence",
-    permisos: ["ADMINISTRATOR"],
-    permisos_bot: ["ADMINISTRATOR"],
+    permissions: ["ADMINISTRATOR"],
+    bot_permissions: ["ADMINISTRATOR"],
     run: async (client, message, args, prefix) =>  {
 
         actType = args[0].toUpperCase();
