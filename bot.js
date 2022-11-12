@@ -17,6 +17,7 @@ const client = new Client({
 });
 
 client.commands = new Collection(); //Here all bot commands will be saved
+client.slashCommands = new Collection() //Here all bot slashCommands will be saved
 client.aliases = new Collection(); //Here all command Aliases will be saved
 
 function requerirhandlers(){

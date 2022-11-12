@@ -11,6 +11,9 @@ module.exports = client => {
         console.log("Error when connecting to MONGODB database".red);
         console.log(err);
     })
+    
+    const slashcommands = client.slashCommands.map(x => x)
+    client.application.commands.set(slashcommands)
 
     console.log(`Connected as ${client.user.tag}`.green)
 }
